@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.sent-chat {
+  background-color: black;
+  color: white;
+
+}
+
+.received-chat {
+  background-color: #e5e5e5;
+  color: black;
+}
+
+.chat {
+  border-radius: 10%;
+  padding: 1rem;
+}
+
+.message-padding {
+  padding: 0 6rem;
+}
