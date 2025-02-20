@@ -5,7 +5,7 @@ import Header from "./components/Layout/Header"
 const App = () => {
   return (
     <>
-      <div className="w-1/4  border-1 border-slate-200 absolute top-40 left-180 rounded-2xl p-4">
+      <div className="w-1/4  border-1 border-slate-200 absolute top-40 left-180 rounded-2xl p-4 shadow-md">
       <div id="Header">
         <Header />
       </div>

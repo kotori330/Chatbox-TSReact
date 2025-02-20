@@ -9,7 +9,7 @@ const InputField = ({
     <>
       <input
         type="text"
-        className="rounded-2xl p-2 drop-shadow-md hover:cursor-text border-slate-300 shadow-sm w-full"
+        className="rounded-2xl p-2 drop-shadow-md hover:cursor-text border border-slate-300 w-full"
         placeholder="Type your message..."
         value={value}
         onChange={handleChange}

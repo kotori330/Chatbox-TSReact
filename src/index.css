@@ -1,19 +1,29 @@
 @import "tailwindcss";
 
+:root {
+  font-family:  ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 .sent-chat {
   background-color: black;
   color: white;
-
+  margin-left: auto;
+  width: 70%;
+  border-radius: 30%;
+  padding: 0.5rem;
 }
 
 .received-chat {
   background-color: #e5e5e5;
   color: black;
+  margin-right: auto;
+  width: 70%;
+  border-radius: 30%;
+  padding: 0.5rem;
 }
 
 .chat {
-  border-radius: 10%;
-  padding: 1rem;
+  margin: 0.5rem 0;
 }
 
 .message-padding {

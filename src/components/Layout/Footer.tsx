@@ -15,6 +15,9 @@ const Footer = () => {
     setMessage(message);
   };
 
+
+    
+
   return (
     <>
       <div className="flex space-x-3 mt-6">
@@ -24,7 +27,7 @@ const Footer = () => {
             handleChange(e.target.value);
           }}
         />
-        <SendButton handleClick={handleSendMessage} />
+        <SendButton disabled={!message} handleClick={handleSendMessage} />
       </div>
     </>
   );

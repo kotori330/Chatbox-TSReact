@@ -2,11 +2,10 @@ import { cn } from "../../utils/clsx";
 import { dialogue } from "../../services/messageData";
 
 const Content = () => {
-  let isSend = false;
 
-  const chatClass = cn("chat", {
-    "send-chat": isSend,
-    "received-chat": !isSend,
+  const chatClass = (sentMessage: boolean) => cn({
+    "sent-chat": sentMessage,
+    "received-chat": !sentMessage,
   });
 
   return (
@@ -15,23 +14,16 @@ const Content = () => {
         {dialogue.map((item, index) => {
           return (
             <>
-              <div className="flex">
-              {item.sentMessage ? (
-                <div className="message-padding"></div>
-              ) : (
-                <></>
-              )}
-
-              <div className={chatClass} key={index}>
-                <span>{item.message}</span>
+              
+            <div className="chat">
+              <div className={chatClass(item.sentMessage)} key={index}>
+                <span className="">{item.message}</span>
               </div>
 
-              {item.sentMessage ? (
-                <></>
-              ) : (
-                <div className="message-padding"></div>
-              )}
-              </div>
+            </div>
+
+              
+              
             </>
           );
         })}
