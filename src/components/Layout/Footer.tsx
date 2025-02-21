@@ -1,22 +1,14 @@
 import InputField from "../UI/InputField";
 import SendButton from "../Button/SendButton";
-import { dialogue } from "../../services/messageData";
 import { useState } from "react";
 
-const Footer = () => {
+const Footer = ({onSendMessage} : {onSendMessage: (message: string) => void}) => {
   const [message, setMessage] = useState("");
 
   const handleSendMessage = () => {
-    dialogue.push({ message, sentMessage: true });
-    setMessage("");
+    onSendMessage(message);
+    setMessage("")
   };
-
-  const handleChange = (message: string) => {
-    setMessage(message);
-  };
-
-
-    
 
   return (
     <>
@@ -24,10 +16,10 @@ const Footer = () => {
         <InputField
           value={message}
           handleChange={(e) => {
-            handleChange(e.target.value);
+            setMessage(e.target.value);
           }}
         />
-        <SendButton disabled={!message} handleClick={handleSendMessage} />
+        <SendButton disabled={!message} handleSendMessage={handleSendMessage} />
       </div>
     </>
   );

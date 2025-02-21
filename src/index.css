@@ -8,24 +8,31 @@
   background-color: black;
   color: white;
   margin-left: auto;
-  width: 70%;
-  border-radius: 30%;
-  padding: 0.5rem;
+  max-width: 70%;
+  width: fit-content;
+  border-radius: 20px;
+  padding: 0.75rem 1rem;
 }
 
 .received-chat {
   background-color: #e5e5e5;
   color: black;
   margin-right: auto;
-  width: 70%;
-  border-radius: 30%;
-  padding: 0.5rem;
+  max-width: 70%;
+  border-radius: 20px;
+  padding: 0.75rem 1rem;
 }
 
 .chat {
-  margin: 0.5rem 0;
+  display: inline-block;
+  /* Break long word */
+  word-wrap: break-word; 
+  width: 100%;
+  /* Break on white-space */
+  white-space: pre-wrap;
 }
 
-.message-padding {
-  padding: 0 6rem;
+.modal-divider {
+  border: 1px solid rgba(203, 213, 225, 0.5);
+  width: 100%;
 }
