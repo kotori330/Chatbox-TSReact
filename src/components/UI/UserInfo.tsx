@@ -6,20 +6,19 @@ export const UserInfo = ({
   name,
   email,
   contactId,
-  isAdded = false
 }: {
   className: string;
   src: string;
   name: string;
   email: string;
   contactId: string;
-  isAdded?: boolean
+  isAdded?: boolean;
 }) => {
   return (
     <div className={className} id={contactId}>
       <img src={src} alt="profile-picture" className="rounded-full w-10 h-10" />
-      <div className="grid auto-rows-auto -space-y-1 text-sm">
-        <span className="font-bold">{name}</span>
+      <div className="grid auto-rows-auto -space-y-1 text-sm select-none">
+        <span className="font-bold ">{name}</span>
         <span className="text-slate-400">{email}</span>
       </div>
     </div>
@@ -33,7 +32,7 @@ const MainUserInfo = () => {
   return (
     <>
       <UserInfo
-      className="flex justify-center items-center space-x-4"
+        className="flex justify-center items-center space-x-4"
         contactId={thirdContact.id}
         src={thirdContact.avatar}
         name={thirdContact.name}

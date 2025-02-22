@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* @layer base {
+  img {
+    max-width: none;
+  }
+} */
+
 :root {
   font-family:  ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -36,3 +42,4 @@
   border: 1px solid rgba(203, 213, 225, 0.5);
   width: 100%;
 }
+

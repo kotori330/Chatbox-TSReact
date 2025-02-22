@@ -1,21 +1,32 @@
 import { useState } from "react";
 import { listContact } from "../../services/staticData";
 import { UserInfo } from "../UI/UserInfo";
+import { cn } from "../../utils/clsx";
+
+// tạo 1 array với object rỗng
+type Avatar = {
+  id: string;
+  avatar: string;
+};
 
 const ModalContent = ({
   closeModal,
-  filterListContact,
+  // filterListContact,
 }: {
   closeModal: () => void;
-  filterListContact: (searchValue: string) => void;
+  // filterListContact: (searchValue: string) => void;
 }) => {
   const [addedContact, setAddedContact] = useState(
     listContact.map((contact) => ({
       id: contact.id,
+      name: contact.name,
       avatar: contact.avatar,
+      email: contact.email,
       isAdded: false,
     }))
   );
+
+  const [addedAvatar, setAddedAvatar] = useState([] as Avatar[]);
 
   const toggleAddToThread = (contactId: string) => {
     setAddedContact((prevState) => {
@@ -26,6 +37,34 @@ const ModalContent = ({
         return contact;
       });
     });
+  };
+
+  const handleAvatarThread = (contactId: string, isAdding: boolean) => {
+    setAddedAvatar((prevState) => {
+      if (isAdding) {
+        const contact = listContact.find((contact) => contact.id === contactId);
+        return contact
+          ? [...prevState, { id: contactId, avatar: contact.avatar }]
+          : prevState;
+      } else {
+        return prevState.filter((item) => item.id !== contactId);
+      }
+    });
+  };
+
+  const filterListContact = (contactName: string) => {
+    const lowerCaseName = contactName.toLowerCase();
+    setAddedContact(() =>
+      listContact
+        .map((contact) => ({
+          id: contact.id,
+          name: contact.name,
+          avatar: contact.avatar,
+          email: contact.email,
+          isAdded: false,
+        }))
+        .filter((item) => item.name.toLowerCase().includes(lowerCaseName))
+    );
   };
 
   return (
@@ -46,28 +85,37 @@ const ModalContent = ({
       </div>
       <div className="modal-divider"></div>
 
-      {listContact.map((item) => {
+      {addedContact.map((item) => {
+        const isAdded = addedContact.find(
+          (contact) => contact.id === item.id
+        )?.isAdded;
         return (
-          <div className="relative" onClick={() => toggleAddToThread(item.id)}>
+          <div
+            key={item.id}
+            className="relative select-none"
+            onClick={() => {
+              toggleAddToThread(item.id);
+              handleAvatarThread(item.id, !isAdded);
+            }}
+          >
             <UserInfo
               className="hover:bg-slate-200/50 rounded-xl flex space-x-4 hover:cursor-default my-1 p-2"
               contactId={item.id}
               src={item.avatar}
               name={item.name}
               email={item.email}
-              isAdded={item.isAdded}
+              isAdded={isAdded}
             />
 
             {/* Find the id from addedContact obj which matches the listContact.id. If found, it takes the isAdded property*/}
             {/* Literaly each contact.id will match with corresponding item.id, but writing addedContact.isAdded only is wrong cuz you cannot access a property directly from an array, so "find" method will return the FIRST element that passed, that means every key-value is passed*/}
-            {addedContact.find((contact) => contact.id === item.id)?.isAdded ? (
+            {addedContact.find((contact) => contact.id === item.id)
+              ?.isAdded && (
               <img
                 src="src/assets/check.png"
                 alt=""
                 className="absolute top-4 right-3 w-4 h-4"
               />
-            ) : (
-              <></>
             )}
           </div>
         );
@@ -75,32 +123,31 @@ const ModalContent = ({
 
       <div className="modal-divider"></div>
 
-      <div
-        className="flex justify-between mt-4 mb-2 mx-2"
-        // onChange={displayAddedContacts}
-      >
-        {listContact.map((item) => {
-          return (
-            <>
-              {addedContact.find((contact) => contact.id === item.id)
-                ?.isAdded ? (
-                <img
-                  src={
-                    addedContact.find((contact) => contact.id === item.id)
-                      ?.avatar
-                  }
-                  alt=""
-                  className="w-10 h-10 rounded-full -mx-2"
-                />
-              ) : (
-                <span>Select users to add to this thread</span>
-              )}
-            </>
-          );
-        })}
+      <div className="flex justify-between mt-4 mb-2 mx-2">
+        <div className="flex items-center w-full mx-2">
+          {addedAvatar.map((item) => {
+            return (
+              <img
+                src={item.avatar}
+                alt=""
+                className="w-9 h-9 rounded-full -mx-2"
+              />
+            );
+          })}
+          {addedAvatar.length === 0 && (
+            <span>Select users to add to this thread</span>
+          )}
+        </div>
+
         <button
-          className="bg-black text-white rounded-md text-sm px-4 py-2 hover:cursor-pointer hover:opacity-90"
+          className={cn(
+            "bg-black opacity-50 text-white rounded-md text-sm px-4 py-2 ",
+            {
+              "hover:cursor-pointer hover:opacity-90 !opacity-100": addedAvatar.length >= 2,
+            }
+          )}
           onClick={closeModal}
+          disabled={addedAvatar.length < 2}
         >
           Continue
         </button>
