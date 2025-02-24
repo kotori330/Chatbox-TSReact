@@ -3,7 +3,7 @@ import { listContact } from "../../services/staticData";
 import { UserInfo } from "../UI/UserInfo";
 import { cn } from "../../utils/clsx";
 
-// tạo 1 array với object rỗng
+// Cách để khởi tạo initial state là 1 array với phần tử  là các object 
 type Avatar = {
   id: string;
   avatar: string;
@@ -11,10 +11,8 @@ type Avatar = {
 
 const ModalContent = ({
   closeModal,
-  // filterListContact,
 }: {
   closeModal: () => void;
-  // filterListContact: (searchValue: string) => void;
 }) => {
   const [addedContact, setAddedContact] = useState(
     listContact.map((contact) => ({
@@ -92,6 +90,7 @@ const ModalContent = ({
         return (
           <div
             key={item.id}
+            // CSS: 'select-none': Khiến toàn bộ context không thể bị bôi đen (text, image...)
             className="relative select-none"
             onClick={() => {
               toggleAddToThread(item.id);
@@ -107,7 +106,7 @@ const ModalContent = ({
               isAdded={isAdded}
             />
 
-            {/* Find the id from addedContact obj which matches the listContact.id. If found, it takes the isAdded property*/}
+            {/* Find the id from addedContact obj which matches the listContact.id. If found, it takes the isAdded property */}
             {/* Literaly each contact.id will match with corresponding item.id, but writing addedContact.isAdded only is wrong cuz you cannot access a property directly from an array, so "find" method will return the FIRST element that passed, that means every key-value is passed*/}
             {addedContact.find((contact) => contact.id === item.id)
               ?.isAdded && (
@@ -134,6 +133,7 @@ const ModalContent = ({
               />
             );
           })}
+          {/* '&&': AND operator: If left is true, display right */}
           {addedAvatar.length === 0 && (
             <span>Select users to add to this thread</span>
           )}

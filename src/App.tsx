@@ -5,22 +5,23 @@ import Header from "./components/Layout/Header";
 import { dialogue } from "./services/messageData";
 
 const App = () => {
-  const [messages, setMessages] = useState(dialogue)
+  const [messages, setMessages] = useState(dialogue);
 
   const onSendMessage = (message: string) => {
-    setMessages([...messages, { message, sentMessage: true}])
-  }
+    setMessages([...messages, { message, sentMessage: true }]);
+  };
   return (
     <>
-      <div className="w-[22%]  border-1 border-slate-200 absolute top-40 left-180 rounded-2xl p-6 shadow-md">
+    {/* CSS: 'max-w-[rem]': Responsive padding */}
+      <div className="max-w-[26rem] items-center mx-auto border-1 border-slate-200 rounded-2xl p-6 mt-24 shadow-md">
         <div id="Header">
           <Header />
         </div>
         <div id="Content">
-          <Content message={messages}/>
+          <Content message={messages} />
         </div>
         <div id="footer">
-          <Footer onSendMessage={onSendMessage}/>
+          <Footer onSendMessage={onSendMessage} />
         </div>
       </div>
     </>

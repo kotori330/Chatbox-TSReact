@@ -6,6 +6,7 @@ type Message = {
 }
 
 const Content = ({message} : {message: Message[] }) => {
+  // Declare cn explicitly
   const chatClass = (sentMessage: boolean) =>
     cn({
       "sent-chat": sentMessage,
@@ -20,7 +21,9 @@ const Content = ({message} : {message: Message[] }) => {
             <>
               <div className="my-2 max-w-[22.5rem]">
                 <div className={chatClass(item.sentMessage)} key={index}>
-                  <span className="chat">{item.message}</span>
+                  {/* CSS: 'break-words': Break long words */}
+                  {/* CSS: 'whitespace-pre-wrap': Break on white space */}
+                  <span className="inline-block break-words w-full whitespace-pre-wrap">{item.message}</span>
                 </div>
               </div>
             </>

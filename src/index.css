@@ -29,15 +29,6 @@
   padding: 0.75rem 1rem;
 }
 
-.chat {
-  display: inline-block;
-  /* Break long word */
-  word-wrap: break-word; 
-  width: 100%;
-  /* Break on white-space */
-  white-space: pre-wrap;
-}
-
 .modal-divider {
   border: 1px solid rgba(203, 213, 225, 0.5);
   width: 100%;

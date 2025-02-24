@@ -8,6 +8,7 @@ const ModalHeader = ({ closeModal }: { closeModal: () => void }) => {
             Invite a user to this thread. This will create a new group message.
           </span>
         </div>
+        {/* CSS: 'absolute' and 'right-0': Make the element float to right of the container. This is an altertive way of using just-between */}
         <div className="absolute -top-1 right-0 text-2xl font-extralight">
           <span
             className="hover:font-medium hover:cursor-pointer"
